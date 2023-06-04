@@ -11,9 +11,10 @@ public class ApiUserRetriver implements UserRetriever {
 
     private final WebClient webClient;
 
-    public ApiUserRetriver(WebClient.Builder builder) {
-        webClient = builder.baseUrl("https://jsonplaceholder.typicode.com").build();
+    public ApiUserRetriver() {
+        webClient = WebClient.builder().baseUrl("https://jsonplaceholder.typicode.com").build();
     }
+
     @Override
     public List<User> getAllUsers() {
         return webClient.get()
