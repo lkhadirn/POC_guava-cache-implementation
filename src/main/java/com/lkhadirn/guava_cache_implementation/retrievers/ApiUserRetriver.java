@@ -11,8 +11,8 @@ public class ApiUserRetriver implements UserRetriever {
 
     private final WebClient webClient;
 
-    public ApiUserRetriver() {
-        webClient = WebClient.builder().baseUrl("https://jsonplaceholder.typicode.com").build();
+    public ApiUserRetriver(WebClient.Builder webClientBuilder) {
+        webClient = webClientBuilder.baseUrl("https://jsonplaceholder.typicode.com").build();
     }
 
     @Override
@@ -20,7 +20,8 @@ public class ApiUserRetriver implements UserRetriever {
         return webClient.get()
                 .uri("/Users")
                 .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<List<User>>() {})
+                .bodyToMono(new ParameterizedTypeReference<List<User>>() {
+                })
                 .block();
     }
 }

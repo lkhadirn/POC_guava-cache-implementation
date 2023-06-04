@@ -14,11 +14,7 @@ import java.util.List;
 public class MainController {
 
     @Autowired
-    private final UserRetriever userRetriever;
-
-    public MainController(UserRetriever userRetriever) {
-        this.userRetriever = userRetriever;
-    }
+    private UserRetriever userRetriever;
 
     @GetMapping(value = "/users", produces = "application/json")
     public List<User> getAllUsers() {

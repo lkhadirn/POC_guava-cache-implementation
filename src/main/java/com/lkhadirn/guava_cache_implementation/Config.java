@@ -9,6 +9,7 @@ import com.lkhadirn.guava_cache_implementation.retrievers.CachedUserRetriever;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class Config {
 
     @Bean
     public UserRetriever userRetriever() {
-        ApiUserRetriver apiUserRetriver = new ApiUserRetriver();
+        ApiUserRetriver apiUserRetriver = new ApiUserRetriver(WebClient.builder());
         LoadingCache<String, List<User>> loadingCache = CacheBuilder.from(cacheSpec)
                 .build(new CachedUserRetriever.UserCacheLoader(apiUserRetriver));
         return new CachedUserRetriever(loadingCache);
